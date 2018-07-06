@@ -1,7 +1,7 @@
 # algorithm-offer
 《剑指offer》算法解析
 
-#####1.二维数组中的查找
+##### 1.二维数组中的查找
 题目描述:在一个二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。
 
 ```
@@ -42,5 +42,73 @@ public:
     return false;
     }
 };
+
+```
+
+##### 2.
+请实现一个函数，将一个字符串中的空格替换成“%20”。例如，当字符串为We Are Happy.则经过替换之后的字符串为We%20Are%20Happy。
+
+
+```
+void replaceSpace(char str[], int length)
+{
+    if(str == NULL || length < 0)
+    {
+        return ;
+    }
+    
+    // 计算出有多少空格和原理str的总长度
+    int blanksCount = 0;
+    int Originallength = 0;
+    
+    int i =0;
+    while (str[i] != '\0')
+    {
+        Originallength++;
+        if(str[i]==' ')
+        {
+            ++blanksCount;
+        }
+
+        i++;
+    }
+
+    // 如果替换后的空间大于给的空间 就直接return
+    int newStrLength = Originallength + blanksCount * (3-1);
+    if (newStrLength > length)
+    {
+        return;
+    }
+    
+    // 替换
+    int pnewStrLength = newStrLength;
+    int pOriginStrLength = Originallength;
+    while (pOriginStrLength >= 0 && pnewStrLength >= pOriginStrLength)
+    {
+        if(str[pOriginStrLength] == ' ')
+        {
+            str[pnewStrLength --] = '0';
+            str[pnewStrLength --] = '2';
+            str[pnewStrLength --] = '%';
+        }
+        else
+        {
+            str[pnewStrLength --] = str[pOriginStrLength];
+        }
+        
+        pOriginStrLength --;
+    }
+    printf("str=%s\n",str);
+}
+
+
+
+int main(int argc, const char * argv[])
+{    
+    char pr[16] = "we are happy";
+    replaceSpace(pr, 16 +4);
+    
+    return 0;
+}
 
 ```
