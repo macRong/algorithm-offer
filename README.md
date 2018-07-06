@@ -115,7 +115,7 @@ void replaceSpace(char str[], int length)
 int main(int argc, const char * argv[])
 {    
     char pr[16] = "we are happy";
-    replaceSpace(pr, 16 +4);
+    replaceSpace(pr, 16);
     
     return 0;
 }
