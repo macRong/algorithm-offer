@@ -7,6 +7,7 @@
 
 * <a href="#二维数组中的查找">1. 二维数组中的查找</a>
 * <a href="#替换空格">2. 替换空格 </a>
+* <a href="#从尾到头打印链表 ">3. 从尾到头打印链表  </a>
 
 
 <a id="二维数组中的查找"></a>
@@ -58,7 +59,7 @@ public:
 #### 2.替换空格 
 题目描述:请实现一个函数，将一个字符串中的空格替换成“%20”。例如，当字符串为We Are Happy.则经过替换之后的字符串为We%20Are%20Happy。
 
-解析： 1.从前到后，坏处是每次替换要把后面的全部都移动，性能差
+解析： 1.从前到后，坏处是每次替换要把后面的全部都多次移动，性能差
       2.从后向前，先开辟好替换后空间，把最后一个移动到替换后空间的最后一个位置，依次向前执行
       ![](resource/E7D12592-F8EF-4177-8D83-73F4DAEC7B84.png)
 
@@ -125,3 +126,82 @@ int main(int argc, const char * argv[])
 }
 
 ```
+
+<a id="从尾到头打印链表 "> </a>
+#### 3.从尾到头打印链表 
+题目描述:输入一个链表，按链表值从尾到头的顺序返回一个ArrayList
+
+```
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+struct ListNode {
+    int val;
+    struct ListNode *next;
+    
+    /** 构造函数 */
+    ListNode(int x) :
+        val(x),next(NULL){}
+};
+
+
+class Solution {
+public:
+    vector<int> printListFromTailToHead(struct ListNode* head) {
+        vector<int> value;
+        if(head != NULL)
+        {
+            value.insert(value.begin(),head->val);
+            while(head->next != NULL)
+            {
+                value.insert(value.begin(),head->next->val);
+                head = head->next;
+            }
+            
+        }
+        return value;
+    }
+};
+
+/** 创建链表 */
+ListNode *getNodes(int count)
+{
+    ListNode *node = (ListNode *)malloc(sizeof(ListNode *));
+    node -> val = 0;
+    node -> next = NULL;
+    ListNode *head = node;
+    
+    for (int i = 1; i < count; i ++)
+    {
+        ListNode *newNode = (ListNode *)malloc(sizeof(ListNode *));
+        newNode -> val = i;
+        newNode -> next = NULL;
+        head -> next = newNode;
+        head = newNode;
+    }
+    
+    return node;
+}
+
+int main()
+{
+    ListNode *node= getNodes(10);
+    ListNode *currentNode = node;
+
+    while (currentNode !=  NULL)
+    {
+        printf("currentNode.val =%d \n",currentNode->val);
+        currentNode = currentNode -> next;
+    }
+    
+    Solution *so = new Solution;
+   vector<int> T =  so -> printListFromTailToHead(node);
+    
+    
+    return 0;
+}
+
+```
+
