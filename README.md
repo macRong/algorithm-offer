@@ -146,7 +146,7 @@ struct ListNode {
         val(x),next(NULL){}
 };
 
-
+/** 方式一 */
 class Solution {
 public:
     vector<int> printListFromTailToHead(struct ListNode* head) {
@@ -162,6 +162,32 @@ public:
             
         }
         return value;
+    }
+};
+
+/** 方式二 */
+class Solution {
+public:
+    vector<int> printListFromTailToHead(struct ListNode* head) {
+        vector<int> result;
+        
+        stack<ListNode *> stackNode;
+        
+        ListNode *p = head;
+        while (p != NULL)
+        {
+            stackNode.push(p);
+            p = p -> next;
+        }
+        
+        while (!stackNode.empty())
+        {
+            ListNode *node = stackNode.top();
+            result.push_back(node -> val);
+            stackNode.pop();
+        }
+        
+        return result;
     }
 };
 
