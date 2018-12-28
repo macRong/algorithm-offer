@@ -9,6 +9,10 @@
 * <a href="#替换空格">2. 替换空格 </a>
 * <a href="#从尾到头打印链表 ">3. 从尾到头打印链表  </a>
 
+#####附加:
+* <a href="#字符串转整数 ">1. 字符串转整数 [sample] </a>
+
+
 
 <a id="二维数组中的查找"></a>
 #### 1.二维数组中的查找
@@ -230,4 +234,39 @@ int main()
 }
 
 ```
+
+
+## 附加
+<a id="字符串转整数"> </a>
+#### 1.字符串转整数 
+题目描述:输入一个字符串转整数 如：输入 "1234" 或者{'1','2','3','4','\0'}
+
+```
+int test(char* string = NULL)
+{
+    if (string == NULL) {
+        return 0;
+    }
+    
+    int number = 0;
+    while (*string != '\0') {
+        number = number*10 + *string-'0';
+        ++string ;
+    }
+    
+    return number;
+}
+
+int main(int argc, const char * argv[])
+{
+    char s[] = {'1','2','3' , '\0'};
+    int num = test(s);
+    int num2 = test("123");
+
+    cout << "==== " << num << endl;
+    
+    return 0;
+}
+```
+
 
